@@ -1,5 +1,6 @@
 package com.cristianbyte.survey.api.dto.request;
 
+import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -15,6 +16,7 @@ public class SurveyRequest {
     private String title;
     @NotBlank(message="provide a description")
     private String description;
+    @AssertTrue
     private boolean active;
     @NotNull(message="provide the name of the creator of the survey")
     private int creator;

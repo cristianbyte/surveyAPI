@@ -30,6 +30,7 @@ public class QuestionService implements IQuestionService{
     @Autowired
     private final QuestionMapper questionMapper;
 
+    @Autowired
     private final IOptionService optionService;
 
     @Override
