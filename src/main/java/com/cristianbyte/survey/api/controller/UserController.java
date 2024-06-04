@@ -7,6 +7,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -46,5 +47,11 @@ public class UserController {
     @PostMapping
     public ResponseEntity<UserResponse> create(@Validated @RequestBody UserRequest request) {
         return ResponseEntity.ok(this.userService.create(request));
+    }
+
+    @Operation(summary="Update a user", description="update a user")
+    @PutMapping("/{id}")
+    public ResponseEntity<UserResponse> update(@PathVariable Integer id, @Validated @RequestBody UserRequest request) {
+        return ResponseEntity.ok(this.userService.update(id, request));
     }
 }
