@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 import com.cristianbyte.survey.api.dto.request.UserRequest;
 import com.cristianbyte.survey.api.dto.response.UserResponse;
 import com.cristianbyte.survey.api.mapper.UserMapper;
+import com.cristianbyte.survey.domain.entities.User;
 import com.cristianbyte.survey.domain.repositories.UserRepository;
 import com.cristianbyte.survey.infrastructure.abstract_service.IUserService;
+import com.cristianbyte.survey.util.IdNotFoundException;
 
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -37,8 +39,8 @@ public class UserService implements IUserService {
 
     @Override
     public UserResponse getById(Integer id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getById'");
+        User response = this.find(id);
+        return  userMapper.userToUserResponse(response);
     }
 
     @Override
@@ -58,5 +60,9 @@ public class UserService implements IUserService {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'delete'");
     }
-    
+
+    // thow error id not found exception
+    private User find(Integer id) {
+        return this.userRepository.findById(id).orElseThrow(()-> new IdNotFoundException("id not found"));
+    }
 }
