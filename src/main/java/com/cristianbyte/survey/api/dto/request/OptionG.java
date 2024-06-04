@@ -1,5 +1,6 @@
 package com.cristianbyte.survey.api.dto.request;
 
+import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,6 +12,7 @@ import lombok.NoArgsConstructor;
 public class OptionG {
     @NotBlank(message="you must specify a content for the option")
     private String text;
+    @AssertTrue
     private boolean active;
     private int question;
 }

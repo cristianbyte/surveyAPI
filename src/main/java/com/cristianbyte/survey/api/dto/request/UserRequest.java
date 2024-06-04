@@ -1,7 +1,7 @@
 package com.cristianbyte.survey.api.dto.request;
 
+import jakarta.validation.constraints.AssertTrue;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,6 +17,6 @@ public class UserRequest {
     private String email;
     @Size(min = 5, max = 100, message = "the password must be at least 5 characters and not more than 100 characters")
     private String password;
-    @NotNull(message="you must define a status with active")
+    @AssertTrue
     private boolean active;
 }

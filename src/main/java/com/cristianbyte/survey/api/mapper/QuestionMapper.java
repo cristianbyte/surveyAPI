@@ -11,11 +11,12 @@ import com.cristianbyte.survey.domain.entities.Question;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface QuestionMapper {
-    @Mapping(target = "survey", ignore=true)
+    @Mapping(target = "survey.id", source = "survey")
     @Mapping(target = "options", ignore=true)
     Question questionRequestToQuestion(QuestionRequest request);
     
-    @Mapping(target = "survey", ignore=true)
+    @Mapping(target = "options", ignore=true)
+    @Mapping(target = "survey", source = "survey.id")
     QuestionResponse questionToQuestionResponse(Question question);
     
     @Mapping(target = "survey", ignore=true)
