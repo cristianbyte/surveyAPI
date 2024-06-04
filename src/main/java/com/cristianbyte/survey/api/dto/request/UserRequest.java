@@ -1,22 +1,22 @@
 package com.cristianbyte.survey.api.dto.request;
 
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserRequest {
-    @NotBlank(message = "name is required")
+    @Size(min = 5, max = 100, message = "the name must be at least 5 characters and not more than 100 characters")
     private String name;
-    @NotBlank(message = "email is required")
+    @Email(message = "invalid email address")
     private String email;
-    @NotBlank(message = "password is required")
+    @Size(min = 5, max = 100, message = "the password must be at least 5 characters and not more than 100 characters")
     private String password;
-    @NotBlank(message = "status is required")
+    @NotNull(message="you must define a status with active")
     private boolean active;
 }
