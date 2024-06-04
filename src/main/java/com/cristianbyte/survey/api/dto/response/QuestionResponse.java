@@ -1,6 +1,9 @@
 package com.cristianbyte.survey.api.dto.response;
 
-import com.cristianbyte.survey.util.QuestionType;
+
+import java.util.List;
+
+import com.cristianbyte.survey.api.dto.request.OptionG;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,11 +17,11 @@ public class QuestionResponse{
     
     private String text;
     
-    private QuestionType type;
+    private String type;
     
     private int survey;
     
     private boolean active;
 
-    //private List<OptionRequest> options;
+    private List<OptionG> options;
 }
