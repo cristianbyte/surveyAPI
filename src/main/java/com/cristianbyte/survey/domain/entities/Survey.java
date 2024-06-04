@@ -1,12 +1,16 @@
 package com.cristianbyte.survey.domain.entities;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -20,26 +24,30 @@ import lombok.ToString;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class Survey {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    
-    @Column(nullable = false, length = 100)
-    private String name;
-
-    @Column(nullable = false, length = 100)
-    private String email;
 
     @Column(nullable = false)
-    private String password;
+    private String title;
 
+    @Column(nullable = false, columnDefinition = "TEXT")
+    private String description;
+    
+    @Column(nullable = false)
+    private LocalDate creationDate;
+    
     @Column(nullable = false)
     private boolean active;
 
-    // units
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(referencedColumnName = "id")
+    private User creator;
+
+    //units
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @OneToMany(mappedBy = "creator")
-    private List<Survey> surveys;
+    @OneToMany(mappedBy = "survey")
+    private List<Question> questions;
 }
