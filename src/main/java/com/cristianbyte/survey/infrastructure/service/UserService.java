@@ -51,8 +51,10 @@ public class UserService implements IUserService {
 
     @Override
     public UserResponse update(Integer id, UserRequest request) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        User user = this.find(id);
+        userMapper.updateFromUserRequest(request, user);
+        user.setId(id);
+        return userMapper.userToUserResponse(this.userRepository.save(user));
     }
 
     @Override
