@@ -32,7 +32,7 @@ public class Question {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String text;
     
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false, length = 5)
     private String type;
     
     @ManyToOne(fetch=FetchType.LAZY)
