@@ -5,5 +5,5 @@ import java.util.List;
 import com.cristianbyte.survey.api.dto.request.OptionG;
 
 public interface IOptionService extends CrudAbstractService<OptionG, OptionG, Integer>{
-    void saveAll(List<OptionG> requestList);
+    List<OptionG> saveAll(List<OptionG> requestList);
 }

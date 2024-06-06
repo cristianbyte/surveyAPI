@@ -58,14 +58,14 @@ public class OptionService implements IOptionService {
     }
 
     @Override
-    public void saveAll(List<OptionG> requestList) {
+    public List<OptionG> saveAll(List<OptionG> requestList) {
         List<OptionQs> OptionList;
         if (requestList == null || requestList.isEmpty()) {
             throw new IllegalArgumentException("The request list is empty");
         }else{
             OptionList = requestList.stream().map(Option -> optionMapper.optiongToOptionqs(Option)).toList();
         }
-        this.optionRepository.saveAll(OptionList);
+        return this.optionRepository.saveAll(OptionList).stream().map(option -> optionMapper.optionqsToOptionqG(option)).toList();
     }
 }
     

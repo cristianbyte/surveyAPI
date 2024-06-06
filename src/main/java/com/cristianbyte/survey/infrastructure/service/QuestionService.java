@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.cristianbyte.survey.api.dto.request.OptionG;
@@ -35,8 +36,9 @@ public class QuestionService implements IQuestionService{
 
     @Override
     public Page<QuestionResponse> getAll(int page, int size) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAll'");
+        if (page <0) page = 0;
+        PageRequest pagination = PageRequest.of(page -1, size);
+        return this.questionReposirory.findAll(pagination).map(questionMapper::questionToQuestionResponse);
     }
 
     @Override
@@ -51,7 +53,7 @@ public class QuestionService implements IQuestionService{
         QuestionResponse questionResponse = questionMapper.questionToQuestionResponse(this.questionReposirory.save(newQuestion));
         List<OptionG> optionsList = request.getOptions();
         optionsList.forEach(option -> option.setQuestion(questionResponse.getId()));
-        this.optionService.saveAll(optionsList);
+        questionResponse.setOptions(this.optionService.saveAll(optionsList));
         return questionResponse;
     }
 
