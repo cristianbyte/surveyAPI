@@ -20,6 +20,6 @@ This project is a survey management system designed to efficiently store and man
 - Spring Boot
 - GitHub
 - Git
-- MySQL
+- Postgresql
 - Maven
 - Swagger
